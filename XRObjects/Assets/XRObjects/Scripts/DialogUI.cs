@@ -9,6 +9,7 @@ public class DialogUI : MonoBehaviour
     public Button buttonCloseDialog;
     // public Button buttonShowDialog;
     public Button buttonShowMenu;
+    public Button buttonCapture;
     public GameObject dialog;
     public GameObject menu;
 
@@ -40,6 +41,8 @@ public class DialogUI : MonoBehaviour
     {
         // hide the dialog
         dialog.SetActive(false);
+        // show the capture button
+        buttonCapture.gameObject.SetActive(true);
     }
     // void buttonShowDialogCallback()
     // {

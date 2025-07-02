@@ -67,6 +67,7 @@ public class TidyUpList : MonoBehaviour
 
     void buttonItemCallback()
     {
+        buttonCapture.gameObject.SetActive(false);//hide the capture button
         dialog.SetActive(true); //どのダイアログを表示するか選択する
     }
 }
