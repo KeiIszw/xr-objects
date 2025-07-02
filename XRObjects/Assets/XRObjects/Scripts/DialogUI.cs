@@ -10,6 +10,7 @@ public class DialogUI : MonoBehaviour
     // public Button buttonShowDialog;
     public Button buttonShowMenu;
     public GameObject dialog;
+    public GameObject menu;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,8 @@ public class DialogUI : MonoBehaviour
 
         // hide the dialog at the start
         dialog.SetActive(false);
+        // hide the menu at the start
+        menu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +48,14 @@ public class DialogUI : MonoBehaviour
     // }
     void buttonShowMenuCallback()
     {
-        // show the menu
+        // toggle the menu visibility
+        if (menu.activeSelf)
+        {
+            menu.SetActive(false);
+        }
+        else
+        {
+            menu.SetActive(true);
+        }
     }
 }
