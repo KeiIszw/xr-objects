@@ -41,6 +41,8 @@ public class DialogUI : MonoBehaviour
     {
         // hide the dialog
         dialog.SetActive(false);
+        // hide the menu
+        menu.SetActive(false);
         // show the capture button
         buttonCapture.gameObject.SetActive(true);
     }
