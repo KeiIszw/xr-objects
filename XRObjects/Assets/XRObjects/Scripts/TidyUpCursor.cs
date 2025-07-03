@@ -27,7 +27,7 @@ public class TidyUpCursor : MonoBehaviour
         // カーソルの距離更新
         // スクリーンショット
         // クエリ処理
-        // 結果を格納＆表示
+        // 結果を格納＆表示(これはTidyUpList.cs?)
     }
 
     void buttonPlaceObjectCallback()
