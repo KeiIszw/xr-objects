@@ -57,6 +57,7 @@ public class TidyUpList : MonoBehaviour
         GameObject newItem = Instantiate(tidyUpListItemPrefab, tidyUpListContent.transform);
         // 画像とテキストが入ったダイアログを生成する．
         // 画像とテキストをリストに格納しとく
+        // リストのアイテム名は撮影時間にする
 
         tidyUpListItems.Add(newItem);
         if (tidyUpListItems.Count > 0)
