@@ -5,6 +5,41 @@ using static SpeechRecognizerPlugin;
 using TMPro;
 
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+[System.Serializable]
+public class Translation
+{
+    public string language;
+    public TranslationText text;
+}
+
+[System.Serializable]
+public class TranslationText
+{
+    public string startListening;
+    public string stopListening;
+    public string continuousListening;
+    public string language;
+    public string maxResults;
+    public string resultsTitle;
+    public string errorsTitle;
+    public string boundingBoxOn;
+    public string boundingBoxOff;
+    public string DetectionOn;
+    public string DetectionOff;
+    public string planesShown;
+    public string planesHidden;
+}
+
+[System.Serializable]
+public class TranslationData
+{
+    public Translation[] translations;
+}
 
 public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
 {
@@ -17,7 +52,15 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
   [SerializeField] private TextMeshProUGUI speechTranscribedTextDisplay = null;
   [SerializeField] private TextMeshProUGUI errorsTxt = null;
 
+  // Labels for translation
+  [SerializeField] private TextMeshProUGUI continuousListeningLabel = null;
+  [SerializeField] private TextMeshProUGUI languageLabel = null;
+  [SerializeField] private TextMeshProUGUI maxResultsLabel = null;
+  [SerializeField] private TextMeshProUGUI resultsTitleLabel = null;
+  [SerializeField] private TextMeshProUGUI errorsTitleLabel = null;
+
   private SpeechRecognizerPlugin plugin = null;
+  private TranslationData translationData;
 
   private GameObject requestingGameObject;
   private ActionClass requestingActionClass;
@@ -35,6 +78,18 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
     continuousListeningTgle.onValueChanged.AddListener(SetContinuousListening);
     languageDropdown.onValueChanged.AddListener(SetLanguage);
     maxResultsInputField.onEndEdit.AddListener(SetMaxResults);
+
+    // Load translations
+    string path = Path.Combine(Application.streamingAssetsPath, "translations.json");
+    string jsonString = File.ReadAllText(path, System.Text.Encoding.UTF8);
+    translationData = JsonUtility.FromJson<TranslationData>(jsonString);
+
+    // Populate dropdown
+    languageDropdown.ClearOptions();
+    languageDropdown.AddOptions(translationData.translations.Select(t => new TMP_Dropdown.OptionData(t.language)).ToList());
+
+    // Set initial language
+    SetLanguage(languageDropdown.value);
   }
 
   public void StartListening()
@@ -77,6 +132,31 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
   {
     string newLanguage = languageDropdown.options[dropdownValue].text;
     plugin.SetLanguageForNextRecognition(newLanguage);
+
+    // Find the right translation
+    Translation translation = System.Array.Find(translationData.translations, t => t.language == newLanguage);
+
+    if (translation != null)
+    {
+        // Update UI Texts
+        startListeningBtn.GetComponentInChildren<TextMeshProUGUI>().text = translation.text.startListening;
+        stopListeningBtn.GetComponentInChildren<TextMeshProUGUI>().text = translation.text.stopListening;
+        
+        if(continuousListeningLabel != null)
+            continuousListeningLabel.text = translation.text.continuousListening;
+        
+        if(languageLabel != null)
+            languageLabel.text = translation.text.language;
+
+        if(maxResultsLabel != null)
+            maxResultsLabel.text = translation.text.maxResults;
+
+        if(resultsTitleLabel != null)
+            resultsTitleLabel.text = translation.text.resultsTitle;
+        
+        if(errorsTitleLabel != null)
+            errorsTitleLabel.text = translation.text.errorsTitle;
+    }
   }
 
   private void SetMaxResults(string inputValue)
@@ -103,7 +183,7 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
 
     // then pass result[0] to the requesting entity
     speechTranscribedText = result[0];
-    // speechTranscribedTextDisplay.text = "“<b>" + speechTranscribedText + "?</b>”\n\nthinking...";
+    // speechTranscribedTextDisplay.text = “<b>" + speechTranscribedText + "?</b>”\n\nthinking...";
 
 
     // (requestingGameObject.GetComponent(requestingFunctionName) as ActionClass).onTranscriptionFinished(speechTranscribedText);
@@ -133,3 +213,4 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
     }
   }
 }
+
