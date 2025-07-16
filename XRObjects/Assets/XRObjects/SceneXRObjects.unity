@@ -2360,7 +2360,6 @@ GameObject:
   m_Component:
   - component: {fileID: 559503172}
   - component: {fileID: 559503171}
-  - component: {fileID: 559503170}
   - component: {fileID: 559503169}
   m_Layer: 0
   m_Name: TidyUpCursor
@@ -2384,28 +2383,14 @@ MonoBehaviour:
   buttonCloseDialog: {fileID: 588831703}
   buttonShowMenu: {fileID: 1604931348}
   buttonCapture: {fileID: 853400841}
-  dialog: {fileID: 667725527}
-  menu: {fileID: 1342163479}
---- !u!114 &559503170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559503168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1b4fbb1b14e4c468d1cd458286e41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonCapture: {fileID: 853400841}
   buttonTidyUpList: {fileID: 1423271162}
-  showTidyUpList: 0
-  dialog: {fileID: 667725527}
   tidyUpList: {fileID: 1147687865}
-  tidyUpListContent: {fileID: 0}
   tidyUpListItemPrefab: {fileID: 4758155550083878237, guid: 662f6c2d3abee418792b08729ecc854f,
     type: 3}
+  dialog: {fileID: 667725527}
+  menu: {fileID: 1342163479}
+  tidyUpListContent: {fileID: 0}
+  showTidyUpList: 0
 --- !u!114 &559503171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6232,9 +6217,6 @@ GameObject:
   - component: {fileID: 1486883887}
   - component: {fileID: 1486883886}
   - component: {fileID: 1486883888}
-  - component: {fileID: 1486883889}
-  - component: {fileID: 1486883890}
-  - component: {fileID: 1486883891}
   m_Layer: 0
   m_Name: AR Cursor
   m_TagString: Untagged
@@ -6331,60 +6313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Texture2DImageOfObject: {fileID: 0}
   objectConversationID: 
---- !u!114 &1486883889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486883885}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1b4fbb1b14e4c468d1cd458286e41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonCapture: {fileID: 853400841}
-  buttonTidyUpList: {fileID: 1423271162}
-  showTidyUpList: 0
-  dialog: {fileID: 667725527}
-  tidyUpList: {fileID: 1147687865}
-  tidyUpListContent: {fileID: 80671100}
-  tidyUpListItemPrefab: {fileID: 4758155550083878237, guid: 662f6c2d3abee418792b08729ecc854f,
-    type: 3}
---- !u!114 &1486883890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486883885}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2f0c14c9aa946839b6ac1cf39b5121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonCloseDialog: {fileID: 588831703}
-  buttonShowMenu: {fileID: 1604931348}
-  buttonCapture: {fileID: 853400841}
-  dialog: {fileID: 667725527}
-  menu: {fileID: 1342163479}
---- !u!114 &1486883891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1486883885}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bf8039d0c1141c79c6342e1afdf31c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonPlaceObject: {fileID: 853400841}
-  raycastManager: {fileID: 0}
-  objectToPlace: {fileID: 5174153213243167682, guid: 2edccba9ef948487ab5a9c9b3f8bca82,
-    type: 3}
-  spawnedAnchors: []
 --- !u!1 &1552714789
 GameObject:
   m_ObjectHideFlags: 0
