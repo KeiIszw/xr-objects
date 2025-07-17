@@ -88,6 +88,7 @@ public class DialogUI : MonoBehaviour
     {
         buttonCapture.gameObject.SetActive(false);//hide the capture button
         dialog.SetActive(true); //どのダイアログを表示するか選択する
+        tidyUpList.SetActive(false); //hide the tidy up list
     }
 
     void buttonCloseDialogCallback()
