@@ -22,7 +22,7 @@ public class HttpReqByButton : MonoBehaviour
 
     void SendRequest()
     {
-        StartCoroutine(GetRequest("http://localhost:8080/health"));
+        StartCoroutine(GetRequest("http://localhost:8080/"));
     }
 
     IEnumerator GetRequest(string uri)
