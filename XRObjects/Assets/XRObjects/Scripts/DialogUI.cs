@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Newtonsoft.Json;
 
-// attach this script to the AR Cursor GameObject
+// TidyUpCursorにアタッチ
 public class DialogUI : MonoBehaviour
 {
     public Button buttonCloseDialog;
@@ -12,21 +11,22 @@ public class DialogUI : MonoBehaviour
     public Button buttonCapture;
     public Button buttonTidyUpList;
     public GameObject tidyUpList;
-    public GameObject tidyUpListItemPrefab; // prefab for the tidy up list items
+    // public GameObject tidyUpListItemPrefab; // prefab for the tidy up list items
     public GameObject dialog;
     public GameObject menu;
 
-    [HideInInspector] public GameObject tidyUpListContent; // content of the tidy up list
+    // [HideInInspector] public GameObject tidyUpListContent; // content of the tidy up list
     [HideInInspector] public bool showTidyUpList = false;
-    private List<GameObject> tidyUpListItems = new List<GameObject>();
+    [HideInInspector] public GameObject activeHistoryContent; // content of the tidy up list
+    // private List<GameObject> tidyUpListItems = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        tidyUpListContent = tidyUpList.transform.Find("Viewport/Content").gameObject;
+        // tidyUpListContent = tidyUpList.transform.Find("Viewport/Content").gameObject;
 
-        Button buttonCaptureButton = buttonCapture.GetComponent<Button>();
-        buttonCaptureButton.onClick.AddListener(buttonCaptureCallback);
+        // Button buttonCaptureButton = buttonCapture.GetComponent<Button>();
+        // buttonCaptureButton.onClick.AddListener(buttonCaptureCallback);
 
         Button buttonTidyUpListButton = buttonTidyUpList.GetComponent<Button>();
         buttonTidyUpListButton.onClick.AddListener(buttonTidyUpListCallback);
@@ -53,7 +53,18 @@ public class DialogUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // ダイアログが表示されているときは、キャプチャボタンと tidyUpList を非表示にする
+        if (dialog.activeSelf)
+        {
+            buttonCapture.gameObject.SetActive(false);
+            showTidyUpList = false; // tidyUpListの表示状態をリセット
+            tidyUpList.SetActive(false);
+        }
+        else
+        {
+            buttonCapture.gameObject.SetActive(true);
+            tidyUpList.SetActive(showTidyUpList);
+        }
     }
 
     void buttonTidyUpListCallback()
@@ -71,36 +82,36 @@ public class DialogUI : MonoBehaviour
         }
     }
 
-    void buttonCaptureCallback() //temp
-    {
-        GameObject newItem = Instantiate(tidyUpListItemPrefab, tidyUpListContent.transform);
-        // 画像とテキストが入ったダイアログを生成する．
-        // 画像とテキストをリストに格納しとく
-        // リストのアイテム名は撮影時間にする
+    // void buttonCaptureCallback() // いらないかも
+    // {
+    //     GameObject newItem = Instantiate(tidyUpListItemPrefab, tidyUpListContent.transform);
+    //     // 画像とテキストが入ったダイアログを生成する．
+    //     // 画像とテキストをリストに格納しとく
+    //     // リストのアイテム名は撮影時間にする
 
-        tidyUpListItems.Add(newItem);
-        if (tidyUpListItems.Count > 0)
-        {
-            tidyUpListItems[tidyUpListItems.Count - 1].GetComponent<Button>().onClick.AddListener(buttonItemCallback);
-        }
-    }
+    //     tidyUpListItems.Add(newItem);
+    //     if (tidyUpListItems.Count > 0)
+    //     {
+    //         tidyUpListItems[tidyUpListItems.Count - 1].GetComponent<Button>().onClick.AddListener(buttonItemCallback);
+    //     }
+    // }
 
-    void buttonItemCallback()
-    {
-        buttonCapture.gameObject.SetActive(false);//hide the capture button
-        dialog.SetActive(true); //どのダイアログを表示するか選択する
-        tidyUpList.SetActive(false); //hide the tidy up list
+    // void buttonItemCallback()
+    // {
+    //     buttonCapture.gameObject.SetActive(false);//hide the capture button
+    //     dialog.SetActive(true); //どのダイアログを表示するか選択する
+    //     tidyUpList.SetActive(false); //hide the tidy up list
 
-        // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
-        // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。
-        Dictionary<string, object> myDictionaryObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
+    //     // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
+    //     // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。
+    //     Dictionary<string, object> myDictionaryObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
 
-        Debug.Log("--- Newtonsoft.JsonでDictionary<string, object>へ変換 ---");
-        foreach (KeyValuePair<string, object> pair in myDictionaryObject)
-        {
-            Debug.Log($"Key: {pair.Key}, Value: {pair.Value} (Type: {pair.Value.GetType().Name})");
-        }
-    }
+    //     Debug.Log("--- Newtonsoft.JsonでDictionary<string, object>へ変換 ---");
+    //     foreach (KeyValuePair<string, object> pair in myDictionaryObject)
+    //     {
+    //         Debug.Log($"Key: {pair.Key}, Value: {pair.Value} (Type: {pair.Value.GetType().Name})");
+    //     }
+    // }
 
     void buttonCloseDialogCallback()
     {
@@ -110,6 +121,8 @@ public class DialogUI : MonoBehaviour
         menu.SetActive(false);
         // show the capture button
         buttonCapture.gameObject.SetActive(true);
+
+        // ファイルを閉じる
     }
     // void buttonShowDialogCallback()
     // {
