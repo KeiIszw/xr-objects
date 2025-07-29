@@ -14,7 +14,11 @@ public class DialogUI : MonoBehaviour
     // public GameObject tidyUpListItemPrefab; // prefab for the tidy up list items
     public GameObject dialog;
     public GameObject menu;
-
+    public GameObject text;
+    public Button buttonBeforeImg;
+    public Button buttonAfterImg;
+    public Button buttonAnalysisText;
+    public Button buttonSuggestionsText;
     // [HideInInspector] public GameObject tidyUpListContent; // content of the tidy up list
     [HideInInspector] public bool showTidyUpList = false;
     [HideInInspector] public GameObject activeHistoryContent; // content of the tidy up list
@@ -48,6 +52,20 @@ public class DialogUI : MonoBehaviour
         dialog.SetActive(false);
         // hide the menu at the start
         menu.SetActive(false);
+        // hide the text at the start
+        text.SetActive(false);
+
+        Button buttonBeforeImgButton = buttonBeforeImg.GetComponent<Button>();
+        buttonBeforeImgButton.onClick.AddListener(buttonBeforeImgCallback);
+
+        Button buttonAfterImgButton = buttonAfterImg.GetComponent<Button>();
+        buttonAfterImgButton.onClick.AddListener(buttonAfterImgCallback);
+
+        Button buttonAnalysisTextButton = buttonAnalysisText.GetComponent<Button>();
+        buttonAnalysisTextButton.onClick.AddListener(buttonAnalysisTextCallback);
+
+        Button buttonSuggestionsTextButton = buttonSuggestionsText.GetComponent<Button>();
+        buttonSuggestionsTextButton.onClick.AddListener(buttonSuggestionsTextCallback);
     }
 
     // Update is called once per frame
@@ -119,6 +137,8 @@ public class DialogUI : MonoBehaviour
         dialog.SetActive(false);
         // hide the menu
         menu.SetActive(false);
+        // hide the text
+        text.SetActive(false);
         // show the capture button
         buttonCapture.gameObject.SetActive(true);
 
@@ -140,6 +160,49 @@ public class DialogUI : MonoBehaviour
         {
             menu.SetActive(true);
         }
+
+        // hide the text
+        text.SetActive(false);
+    }
+
+    void buttonBeforeImgCallback()
+    {
+        menu.SetActive(false); // hide the menu
+        text.SetActive(false); // hide the text
+
+        // Show the before image in the dialog
+        // ここでbeforeImgの表示処理を実装
+        Debug.Log("Before image button clicked");
+    }
+
+    void buttonAfterImgCallback()
+    {
+        menu.SetActive(false); // hide the menu
+        text.SetActive(false); // hide the text
+
+        // Show the after image in the dialog
+        // ここでafterImgの表示処理を実装
+        Debug.Log("After image button clicked");
+    }
+
+    void buttonAnalysisTextCallback()
+    {
+        menu.SetActive(false); // hide the menu
+        text.SetActive(true); // show the text
+
+        // Show the analysis text in the dialog
+        // ここでanalysisTextの表示処理を実装
+        Debug.Log("Analysis text button clicked");
+    }
+
+    void buttonSuggestionsTextCallback()
+    {
+        menu.SetActive(false); // hide the menu
+        text.SetActive(true); // show the text
+
+        // Show the suggestions text in the dialog
+        // ここでsuggestionsTextの表示処理を実装
+        Debug.Log("Suggestions text button clicked");
     }
     const string testJson = @"
                           {
