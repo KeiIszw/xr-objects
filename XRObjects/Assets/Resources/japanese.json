@@ -1,0 +1,20 @@
+
+{
+  "startListening": "聞き取り開始",
+  "stopListening": "聞き取り停止",
+  "continuousListening": "連続聞き取り:",
+  "language": "言語:",
+  "maxResults": "最大結果数:",
+  "resultsTitle": "結果:",
+  "errorsTitle": "エラー:",
+  "boundingBoxOn": "ラベル オン",
+  "boundingBoxOff": "ラベル オフ",
+  "detectionOn": "物体認識 オン",
+  "detectionOff": "物体認識 オフ",
+  "planesShown": "平面表示 オン",
+  "planesHidden": "平面表示 オフ",
+  "history": "採点履歴",
+  "deleteObjects": "オブジェクト削除",
+  "speechMenu": "音声メニュー"
+}
+    

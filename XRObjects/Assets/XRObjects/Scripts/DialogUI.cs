@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 // attach this script to the AR Cursor GameObject
 public class DialogUI : MonoBehaviour
