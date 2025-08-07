@@ -22,8 +22,8 @@ public class SetupTidyupProxy : MonoBehaviour
     // public GameObject tidyUpList;
     [HideInInspector] public GameObject historyContent; // content of the tidy up list
 
-    [HideInInspector] public string objectName;
-    [HideInInspector] public string jsonMetadata;
+    [HideInInspector] public string captureTime;
+    [HideInInspector] public string AnalysisjsonPath;
     [HideInInspector] public string beforeImgPath;
     [HideInInspector] public string afterImgPath;
 
@@ -36,13 +36,18 @@ public class SetupTidyupProxy : MonoBehaviour
         // set the object name to the current time
         // jsonから時間取ったほうがいいと思う
         System.DateTime now = System.DateTime.Now;
-        objectName = now.ToString("HH:mm:ss");
+        captureTime = now.ToString("HH:mm:ss");
+
+
+        // 以下llmの応答を待つからstart()で設定しないほうがいいかも
+        // updateMetadata関数定義して、llmの応答を受け取ったときに呼び出す
+        // llmのスクリプトをproxyにアタッチしておく
 
         // set the tidyup point
         string tidyupScore = "Score"; // 仮
 
         // set the metadata
-        string metadata = tidyupScore + "\n" + objectName;
+        string metadata = tidyupScore + "\n" + captureTime;
 
         metadataMenu.GetComponentInChildren<TextMeshProUGUI>().text = metadata;
 
