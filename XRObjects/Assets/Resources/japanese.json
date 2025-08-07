@@ -15,6 +15,10 @@
   "planesHidden": "平面表示 オフ",
   "history": "採点履歴",
   "deleteObjects": "オブジェクト削除",
-  "speechMenu": "音声メニュー"
+  "speechMenu": "音声メニュー",
+  "before": "片付け前",
+  "after": "片付け後",
+  "analysis": "分析",
+  "suggestions": "提案"
 }
     

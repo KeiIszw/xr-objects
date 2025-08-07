@@ -23,7 +23,10 @@ public class LanguageData
     public string history;
     public string deleteObjects;
     public string speechMenu;
-    public string capture;
+    public string before;
+    public string after;
+    public string analysis;
+    public string suggestions;
 }
 
 public class LanguageManager : MonoBehaviour
@@ -137,6 +140,10 @@ public class LanguageManager : MonoBehaviour
             case "history": return currentLanguage.history;
             case "deleteObjects": return currentLanguage.deleteObjects;
             case "speechMenu": return currentLanguage.speechMenu;
+            case "before": return currentLanguage.before;
+            case "after": return currentLanguage.after;
+            case "analysis": return currentLanguage.analysis;
+            case "suggestions": return currentLanguage.suggestions;
             default: return "not found";
         }
     }

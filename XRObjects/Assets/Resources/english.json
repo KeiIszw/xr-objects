@@ -15,5 +15,9 @@
   "planesHidden": "planes HIDDEN",
   "history": "Score History",
   "deleteObjects": "Delete Objects",
-  "speechMenu": "Speech Menu"
+  "speechMenu": "Speech Menu",
+  "before": "Before Cleanup",
+  "after": "After Cleanup",
+  "analysis": "Analysis",
+  "suggestions": "Suggestions"
 }
