@@ -25,6 +25,8 @@ public class DialogUI : MonoBehaviour
     [HideInInspector] public bool showTidyUpList = false;
     [HideInInspector] public GameObject activeHistoryContent; // content of the tidy up list
     // private List<GameObject> tidyUpListItems = new List<GameObject>();
+    
+    [SerializeField] private TextMeshProUGUI analysisTextField; // TextMeshProUGUI component for analysis text
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +80,7 @@ public class DialogUI : MonoBehaviour
         // {
         //     Debug.Log($"Key: {pair.Key}, Value: {pair.Value} (Type: {pair.Value.GetType().Name})");
         // }
+        analysisTextField.text = FileUtils.GetDocumentsPath();
     }
 
     // Update is called once per frame
