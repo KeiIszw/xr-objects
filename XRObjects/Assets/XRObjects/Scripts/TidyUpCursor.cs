@@ -71,7 +71,7 @@ public class TidyUpCursor : MonoBehaviour
         newHistoryContent.GetComponent<SetupHistoryContent>().tidyUpObject = newAnchor;
 
         // 履歴ボタンの名前を設定
-        newHistoryContent.GetComponentInChildren<TextMeshProUGUI>().text = newAnchor.GetComponent<SetupTidyupProxy>().objectName;
+        newHistoryContent.GetComponentInChildren<TextMeshProUGUI>().text = newAnchor.GetComponent<SetupTidyupProxy>().captureTime;
 
 
         // TidyUpProxyに履歴ボタンをアタッチ
