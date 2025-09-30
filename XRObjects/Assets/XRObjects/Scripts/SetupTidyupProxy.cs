@@ -22,32 +22,37 @@ public class SetupTidyupProxy : MonoBehaviour
     // public GameObject tidyUpList;
     [HideInInspector] public GameObject historyContent; // content of the tidy up list
 
-    [HideInInspector] public string captureTime;
-    [HideInInspector] public string AnalysisjsonPath;
-    [HideInInspector] public string beforeImgPath;
-    [HideInInspector] public string afterImgPath;
+    [HideInInspector] public string captureDateTime; // yyyy-MM-dd:HH-mm-ss
+    [HideInInspector] public int cleanlinessScore;
+    [HideInInspector] public string analysisText;
+    [HideInInspector] public string suggestionsText;
+    [HideInInspector] public string beforeImgPath; // いらないかも
+    [HideInInspector] public string afterImgPath; // いらないかも
+
 
     // Start is called before the first frame update
     void Start()
     {
-        // turn off metadata menu
+        // turn on metadata menu
         metadataMenu.GetComponent<Canvas>().enabled = true;
 
         // set the object name to the current time
         // jsonから時間取ったほうがいいと思う
-        System.DateTime now = System.DateTime.Now;
-        captureTime = now.ToString("HH:mm:ss");
+        // captureDateTime = System.DateTime.Now.ToString("yyyy-MM-dd:HH-mm-ss");
+        captureDateTime = "2025-09-27:23-28-11"; // 仮
 
+        analysisText = "カテゴリ: 散乱物・放置物・配線、整理不足\n" + "詳細: モニター左下にスマートフォンが置かれ、その手前には付箋が貼られたボードや名刺入れらしき物が見える。左手前には飲みかけのペットボトル、使い終わったらしき紙タオルや布、未開封の箱などが無造作に置かれている。マイクの周囲にも複数のケーブルが絡まり、整理されていない。\n" + "場所: デスク上（中央から左側）";
+        suggestionsText = "優先度: 高\n" + "提案: デスク上の不要な物（飲み物の空き容器、使い終わった紙類、布など）をまず片付け、ごみは捨てる。使用頻度の低い小物や書類は適切な収納場所に移動させる。\n" + "対象エリア: デスク上全体\n";
 
         // 以下llmの応答を待つからstart()で設定しないほうがいいかも
         // updateMetadata関数定義して、llmの応答を受け取ったときに呼び出す
         // llmのスクリプトをproxyにアタッチしておく
 
         // set the tidyup point
-        string tidyupScore = "Score"; // 仮
+        cleanlinessScore = 100; // 仮
 
         // set the metadata
-        string metadata = tidyupScore + "\n" + captureTime;
+        string metadata = cleanlinessScore.ToString() + "\n" + captureDateTime;
 
         metadataMenu.GetComponentInChildren<TextMeshProUGUI>().text = metadata;
 
@@ -111,9 +116,10 @@ public class SetupTidyupProxy : MonoBehaviour
                     // }
                 }
             }
-
-
         }
+
+        // Debug.Log("SetupTidyupProxy Update");
+        // LLMの応答を待つ
     }
 
     public void deselectObject()
