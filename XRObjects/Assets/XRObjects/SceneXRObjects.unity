@@ -2631,6 +2631,7 @@ GameObject:
   - component: {fileID: 559503172}
   - component: {fileID: 559503171}
   - component: {fileID: 559503169}
+  - component: {fileID: 559503173}
   m_Layer: 0
   m_Name: TidyUpCursor
   m_TagString: Untagged
@@ -2700,6 +2701,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &559503173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559503168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac7fb6b1799ed04598eddec0c6f0bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  captureButton: {fileID: 853400841}
+  planeDistance: 1
+  showCornerMarkers: 1
+  showCornerLines: 1
+  markerSize: 0.02
+  lineWidth: 0.01
+  lineColor: {r: 1, g: 0, b: 0, a: 1}
+  raycastManager: {fileID: 1022931786}
+  anchorManager: {fileID: 1022931789}
 --- !u!1 &559514172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4697,6 +4719,7 @@ GameObject:
   - component: {fileID: 1022931787}
   - component: {fileID: 1022931786}
   - component: {fileID: 1022931788}
+  - component: {fileID: 1022931789}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -4778,6 +4801,19 @@ MonoBehaviour:
   m_EnvironmentDepthMode: 3
   m_EnvironmentDepthTemporalSmoothing: 1
   m_OcclusionPreferenceMode: 0
+--- !u!114 &1022931789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022931783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 0}
 --- !u!1 &1058508587
 GameObject:
   m_ObjectHideFlags: 0
@@ -6004,8 +6040,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 159599708}
   m_HandleRect: {fileID: 159599707}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6225,7 +6261,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1699021632}
   m_HandleRect: {fileID: 1699021631}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
