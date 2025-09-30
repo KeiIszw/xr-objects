@@ -1,0 +1,23 @@
+
+{
+  "startListening": "Start Listening",
+  "stopListening": "Stop Listening",
+  "continuousListening": "Continuous Listening:",
+  "language": "Language:",
+  "maxResults": "Max Results:",
+  "resultsTitle": "Results:",
+  "errorsTitle": "Errors:",
+  "boundingBoxOn": "Label ON",
+  "boundingBoxOff": "Label OFF",
+  "detectionOn": "Detection ON",
+  "detectionOff": "Detection OFF",
+  "planesShown": "planes SHOWN",
+  "planesHidden": "planes HIDDEN",
+  "history": "Score History",
+  "deleteObjects": "Delete Objects",
+  "speechMenu": "Speech Menu",
+  "before": "Before Cleanup",
+  "after": "After Cleanup",
+  "analysis": "Analysis",
+  "suggestions": "Suggestions"
+}

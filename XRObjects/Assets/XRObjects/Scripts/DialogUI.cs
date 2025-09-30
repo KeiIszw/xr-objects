@@ -73,6 +73,18 @@ public class DialogUI : MonoBehaviour
         Button buttonSuggestionsTextButton = buttonSuggestionsText.GetComponent<Button>();
         buttonSuggestionsTextButton.onClick.AddListener(buttonSuggestionsTextCallback);
 
+        LanguageManager.Instance.OnLanguageChanged += UpdateText;
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
+        if (LanguageManager.Instance == null) return;
+        buttonBeforeImg.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("before");
+        buttonAfterImg.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("after");
+        buttonAnalysisText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("analysis");
+        buttonSuggestionsText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("suggestions");
+
         // // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
         // // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。
         // Dictionary<string, object> myDictionaryObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
@@ -99,6 +111,7 @@ public class DialogUI : MonoBehaviour
             buttonCapture.gameObject.SetActive(true);
             tidyUpList.SetActive(showTidyUpList);
         }
+        UpdateText();
     }
 
     void buttonTidyUpListCallback()

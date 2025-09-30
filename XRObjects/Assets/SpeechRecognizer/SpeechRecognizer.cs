@@ -5,6 +5,10 @@ using static SpeechRecognizerPlugin;
 using TMPro;
 
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
 {
@@ -33,9 +37,23 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
     startListeningBtn.onClick.AddListener(StartListening);
     stopListeningBtn.onClick.AddListener(StopListening);
     continuousListeningTgle.onValueChanged.AddListener(SetContinuousListening);
-    languageDropdown.onValueChanged.AddListener(SetLanguage);
-    maxResultsInputField.onEndEdit.AddListener(SetMaxResults);
+
+    LanguageManager.Instance.OnLanguageChanged += UpdateText;
+    UpdateText();
   }
+
+  public void UpdateText()
+    {
+        if (LanguageManager.Instance == null) return;
+
+        startListeningBtn.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("startListening");
+        stopListeningBtn.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("stopListening");
+        continuousListeningTgle.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("continuousListening");
+        // languageDropdown.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("language");
+        // maxResultsInputField.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("maxResults");
+        // resultsTxt.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("resultsTitle");
+        // errorsTxt.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("errorsTitle");
+    }
 
   public void StartListening()
   {
@@ -103,7 +121,7 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
 
     // then pass result[0] to the requesting entity
     speechTranscribedText = result[0];
-    // speechTranscribedTextDisplay.text = "“<b>" + speechTranscribedText + "?</b>”\n\nthinking...";
+    // speechTranscribedTextDisplay.text = “<b>" + speechTranscribedText + "?</b>”\n\nthinking...";
 
 
     // (requestingGameObject.GetComponent(requestingFunctionName) as ActionClass).onTranscriptionFinished(speechTranscribedText);
@@ -133,3 +151,4 @@ public class SpeechRecognizer : MonoBehaviour, ISpeechRecognizerPlugin
     }
   }
 }
+
