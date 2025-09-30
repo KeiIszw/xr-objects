@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 // ButtonHistoryContentプレハブ(Assets/XRObjects/Prefabs/ButtonHistoryContent.prefab)にアタッチ
 public class SetupHistoryContent : MonoBehaviour
 {
-    [HideInInspector] public GameObject tidyUpObject; // 設置したアンカーオブジェクト(ObjectProxy の Prefab)
+    [HideInInspector] public GameObject tidyUpObject; // 設置したアンカーオブジェクト(ObjectProxy の Prefab) ####未実装！！！！####
     [HideInInspector] public GameObject dialog;
     [HideInInspector] public GameObject TidyUpCursor;
 
@@ -38,7 +38,7 @@ public class SetupHistoryContent : MonoBehaviour
     public void buttonShowDialogCallback()
     {
         // DialogUI.cs の activeHistoryContent にこのオブジェクトをアタッチ
-        TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = this.gameObject;
+        TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = tidyUpObject;
 
         // ダイアログにオブジェクトの情報を設定
 
