@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 // attach this script to the AR Cursor GameObject
 public class TidyUpList : MonoBehaviour
@@ -29,6 +30,16 @@ public class TidyUpList : MonoBehaviour
 
         // hide the  tidy up list at the start
         tidyUpList.SetActive(false);
+
+        LanguageManager.Instance.OnLanguageChanged += UpdateText;
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
+        if (LanguageManager.Instance == null) return;
+
+        buttonTidyUpList.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("history");
     }
 
     // Update is called once per frame
@@ -50,6 +61,7 @@ public class TidyUpList : MonoBehaviour
         {
             tidyUpList.SetActive(false);
         }
+        UpdateText();
     }
 
     void buttonCaptureCallback() //temp

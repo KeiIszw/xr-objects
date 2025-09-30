@@ -161,6 +161,56 @@ public class ARCursor : MonoBehaviour
     }
 
      SetUpPathRenderer();
+
+    // for language support
+    LanguageManager.Instance.OnLanguageChanged += UpdateAllButtonText;
+    UpdateAllButtonText();
+  }
+
+
+  public void UpdateAllButtonText()
+  {
+    if (LanguageManager.Instance == null)
+    {
+      Debug.LogError("LanguageManager instance is null");
+      return;
+    }
+
+    // Update buttonCursor text
+    if (showMediaPipeBoundingBoxes)
+    {
+      buttonCursor.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("boundingBoxOn");
+    }
+    else
+    {
+      buttonCursor.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("boundingBoxOff");
+    }
+
+    // Update buttonMediaPipe text
+    if (mediaPipeActive)
+    {
+      buttonMediaPipe.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("detectionOn");
+    }
+    else
+    {
+      buttonMediaPipe.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("detectionOff");
+    }
+
+    // Update buttonPlanes text
+    if (setupInProgress)
+    {
+      buttonPlanes.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("planesShown");
+    }
+    else
+    {
+      buttonPlanes.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("planesHidden");
+    }
+
+    // Update buttonDeleteObjects text
+    buttonDeleteObjects.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("deleteObjects");
+
+    // Update buttonSpeechPanel text
+    buttonSpeechPanel.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("speechMenu");
   }
 
   Texture2D CropTexture(Texture2D sourceTexture, UnityEngine.Rect cropRectTransform)
@@ -189,6 +239,7 @@ public class ARCursor : MonoBehaviour
 
   void Update()
   {
+    // UpdateAllButtonText();
     if (allowLongPressSelect) CheckForLongPress();
     if (allowCircleSelect) UpdateDrawnPath();
 
@@ -332,7 +383,6 @@ public class ARCursor : MonoBehaviour
         }
         // then reset the variable
         detectedObjectListToAddToScene.Clear();
-
       }
 
     }
@@ -374,14 +424,7 @@ public class ARCursor : MonoBehaviour
     showMediaPipeBoundingBoxes = !showMediaPipeBoundingBoxes;
     cursorChildObject.SetActive(useCursor);
 
-    if (showMediaPipeBoundingBoxes)
-    {
-      buttonCursor.GetComponentInChildren<TextMeshProUGUI>().text = "Bounding box ON";
-    }
-    else
-    {
-      buttonCursor.GetComponentInChildren<TextMeshProUGUI>().text = "Bounding box OFF";
-    }
+    UpdateAllButtonText();
 
   }
 
@@ -392,13 +435,11 @@ public class ARCursor : MonoBehaviour
 
     if (mediaPipeActive)
     {
-      buttonMediaPipe.GetComponentInChildren<TextMeshProUGUI>().text = "Detection ON";
       m_ARCameraManager.GetComponent<ARMPObjectDetection>().enabled = true;
 
     }
     else
     {
-      buttonMediaPipe.GetComponentInChildren<TextMeshProUGUI>().text = "Detection OFF";
       m_ARCameraManager.GetComponent<ARMPObjectDetection>().enabled = false;
       gameObjectCameraPreview.GetComponent<RawImage>().enabled = false;
 
@@ -407,6 +448,7 @@ public class ARCursor : MonoBehaviour
           objectText.text = "";
         });
     }
+    UpdateAllButtonText();
   }
 
   void buttonShowUICallback()
@@ -437,27 +479,19 @@ public class ARCursor : MonoBehaviour
     if (setupInProgress)
     {
       setAllARPlanesActive(true);
-      buttonPlanes.GetComponentInChildren<TextMeshProUGUI>().text = "planes SHOWN";
-
-      // foreach (var spawnedObject in spawnedContainersList)
-      // {
-      //   spawnedObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().enabled = true;
-      // }
-
       // also turn on cursor
       useCursor = true;
     }
     else
     {
       setAllARPlanesActive(false);
-      buttonPlanes.GetComponentInChildren<TextMeshProUGUI>().text = "planes HIDDEN";
-
       // also turn off cursor
       useCursor = false;
 
     }
 
     cursorChildObject.SetActive(useCursor);
+    UpdateAllButtonText();
   }
 
   void buttonDeleteObjectsCallback()
