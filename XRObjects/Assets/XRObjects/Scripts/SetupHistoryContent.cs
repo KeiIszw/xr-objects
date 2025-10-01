@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using TMPro;
+using System.IO;
 
 // ButtonHistoryContentプレハブ(Assets/XRObjects/Prefabs/ButtonHistoryContent.prefab)にアタッチ
 public class SetupHistoryContent : MonoBehaviour
 {
-    [HideInInspector] public GameObject tidyUpObject; // 設置したアンカーオブジェクト(ObjectProxy の Prefab) ####未実装！！！！####
+    [HideInInspector] public GameObject tidyUpObject; // 設置したアンカーオブジェクト(ObjectProxy の Prefab)
     [HideInInspector] public GameObject dialog;
     [HideInInspector] public GameObject TidyUpCursor;
 
@@ -27,6 +29,10 @@ public class SetupHistoryContent : MonoBehaviour
 
         Button buttonShowDialogButton = GetComponent<Button>();
         buttonShowDialogButton.onClick.AddListener(buttonShowDialogCallback);
+
+        // 履歴コンテンツのテキストを設定
+        string captureDateTime = tidyUpObject.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
+        GetComponentInChildren<TextMeshProUGUI>().text = captureDateTime;
     }
 
     // Update is called once per frame
@@ -37,10 +43,8 @@ public class SetupHistoryContent : MonoBehaviour
 
     public void buttonShowDialogCallback()
     {
-        // DialogUI.cs の activeHistoryContent にこのオブジェクトをアタッチ
+        // DialogUI.cs の activeHistoryContent にコンテンツをアタッチ
         TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = tidyUpObject;
-
-        // ダイアログにオブジェクトの情報を設定
 
         // ダイアログを表示
         dialog.SetActive(true);

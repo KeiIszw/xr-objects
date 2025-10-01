@@ -3236,7 +3236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPlaceObject: {fileID: 853400841}
   raycastManager: {fileID: 1022931786}
-  objectToPlace: {fileID: 5528862493905833586, guid: fbc6aeca21375456098c38edf46b8bc9,
+  objectToPlace: {fileID: 5528862493905833586, guid: 41a79530cbbde44ca9158a19b73faf79,
     type: 3}
   tidyUpList: {fileID: 1147687865}
   tidyUpListContent: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &702727110
 Transform:
   m_ObjectHideFlags: 0
@@ -6344,6 +6344,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156586584}
   m_CullTransparentMesh: 0
+--- !u!114 &1171113678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200784299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c955f9761de9141cf961bf1132026c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  captureButton: {fileID: 853400841}
 --- !u!1 &1196342059
 GameObject:
   m_ObjectHideFlags: 0
@@ -6476,6 +6489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1200784301}
   - component: {fileID: 1200784300}
+  - component: {fileID: 1171113678}
   m_Layer: 0
   m_Name: WriteTest
   m_TagString: Untagged

@@ -330,7 +330,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5528862493905833586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4827241956d0142e19a5238f41eca5d5, type: 3}
   m_Name: 
@@ -375,8 +375,11 @@ MonoBehaviour:
   Material2: {fileID: 2100000, guid: 3212d00003787492f84d9f1d5a154b8f, type: 2}
   metadataMenu: {fileID: 5528862493613467129}
   sphere: {fileID: 5528862494285022199}
-  objectTitle: 
-  metadata: 
+  historyContent: {fileID: 0}
+  captureDateTime: 
+  cleanlinessScore: 0
+  analysisText: 
+  suggestionsText: 
 --- !u!1 &5528862494028012577
 GameObject:
   m_ObjectHideFlags: 0

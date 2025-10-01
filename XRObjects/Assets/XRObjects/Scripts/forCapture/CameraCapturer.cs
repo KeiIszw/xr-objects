@@ -8,7 +8,8 @@ using System.IO;
 
 public class CameraCapturer : MonoBehaviour
 {
-    public ARCameraManager cameraManager;
+    // public ARCameraManager cameraManager;
+    public string captureDateTime; // yyyy-MM-dd:HH-mm-ss
 
     private Texture2D FlipTextureHorizontally(Texture2D original)
     {
@@ -31,15 +32,18 @@ public class CameraCapturer : MonoBehaviour
 
     public void CaptureAndSave()
     {
+        GameObject arCamera = GameObject.Find("AR Session Origin/AR Camera");
+        ARCameraManager cameraManager = arCamera.GetComponent<ARCameraManager>();
+
         if (cameraManager == null)
         {
-            Debug.LogError("ARCameraManager が設定されていません。");
+            // Debug.LogError("ARCameraManager が設定されていません。");
             return;
         }
 
         if (!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
         {
-            Debug.LogError("最新のCPUイメージを取得できませんでした。");
+            // Debug.LogError("最新のCPUイメージを取得できませんでした。");
             return;
         }
 
@@ -76,7 +80,7 @@ public class CameraCapturer : MonoBehaviour
 
         // ↓↓↓ 保存ディレクトリ＆ファイル名の生成 ↓↓↓
         string dateDirName = DateTime.Now.ToString("yyyy-MM-dd");
-        string directoryPath = Path.Combine(Application.persistentDataPath, dateDirName);
+        string directoryPath = Path.Combine(FileUtils.GetDocumentsPath(), dateDirName);
 
         if (!Directory.Exists(directoryPath))
         {
@@ -87,8 +91,10 @@ public class CameraCapturer : MonoBehaviour
         string filename = Path.Combine(directoryPath, $"before_{timeStamp}.png");
 
         File.WriteAllBytes(filename, bytes);
-        Debug.Log($"📸 スクリーンショットを保存しました: {filename}");
+        // Debug.Log($"📸 スクリーンショットを保存しました: {filename}");
 
         Destroy(texture);
+
+        captureDateTime = dateDirName + ":" + timeStamp; // yyyy-MM-dd:HH-mm-ss
     }
 }

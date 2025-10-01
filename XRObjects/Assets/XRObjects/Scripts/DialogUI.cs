@@ -26,9 +26,9 @@ public class DialogUI : MonoBehaviour
     [HideInInspector] public bool showTidyUpList = false;
     [HideInInspector] public GameObject activeHistoryContent; // content of the tidy up list
     // private List<GameObject> tidyUpListItems = new List<GameObject>();
-    
-    
-    
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +84,7 @@ public class DialogUI : MonoBehaviour
         buttonAfterImg.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("after");
         buttonAnalysisText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("analysis");
         buttonSuggestionsText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("suggestions");
+        buttonTidyUpList.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("history");
 
         // // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
         // // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。
@@ -173,7 +174,6 @@ public class DialogUI : MonoBehaviour
         // reset the dialog image to default
         dialog.GetComponent<Image>().sprite = null;
 
-        // ファイルを閉じる
     }
     // void buttonShowDialogCallback()
     // {
@@ -203,13 +203,17 @@ public class DialogUI : MonoBehaviour
 
         // Show the before image in the dialog
         // ここでbeforeImgの表示処理を実装
-        Debug.Log("Before image button clicked");
+        // Debug.Log("Before image button clicked");
 
         // 写真を表示
+        string captureDateTime = activeHistoryContent.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
+        string captureDate = captureDateTime.Split(':')[0]; // yyyy-MM-dd
+        string captureTime = captureDateTime.Split(':')[1]; // HH-mm-ss
+
         string documentsPath = FileUtils.GetDocumentsPath();
-        string testFolderPath = Path.Combine(documentsPath, "test/2025-09-27");
-        string fileName = "before_23-28-11.png";
-        string filePath = Path.Combine(testFolderPath, fileName);
+        string FolderPath = Path.Combine(documentsPath, captureDate);
+        string fileName = "before_" + captureTime + ".png";
+        string filePath = Path.Combine(FolderPath, fileName);
         if (File.Exists(filePath))
         {
             byte[] imageData = File.ReadAllBytes(filePath);
@@ -239,13 +243,17 @@ public class DialogUI : MonoBehaviour
 
         // Show the after image in the dialog
         // ここでafterImgの表示処理を実装
-        Debug.Log("After image button clicked");
+        // Debug.Log("After image button clicked");
 
         // 写真を表示
+        string captureDateTime = activeHistoryContent.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
+        string captureDate = captureDateTime.Split(':')[0]; // yyyy-MM-dd
+        string captureTime = captureDateTime.Split(':')[1]; // HH-mm-ss
+
         string documentsPath = FileUtils.GetDocumentsPath();
-        string testFolderPath = Path.Combine(documentsPath, "test/2025-09-27");
-        string fileName = "after_23-28-11.png";
-        string filePath = Path.Combine(testFolderPath, fileName);
+        string FolderPath = Path.Combine(documentsPath, captureDate);
+        string fileName = "after_" + captureTime + ".png";
+        string filePath = Path.Combine(FolderPath, fileName);
         if (File.Exists(filePath))
         {
             byte[] imageData = File.ReadAllBytes(filePath);
@@ -278,12 +286,12 @@ public class DialogUI : MonoBehaviour
 
         // Show the analysis outputText in the dialog
         // ここでanalysisTextの表示処理を実装
-        Debug.Log("Analysis outputText button clicked");
+        // Debug.Log("Analysis outputText button clicked");
 
         // テキストを表示
         // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().analysisText;
-        outputText.GetComponent<TextMeshProUGUI>().text = "カテゴリ: 散乱物・放置物・配線、整理不足\n" + "詳細: モニター左下にスマートフォンが置かれ、その手前には付箋が貼られたボードや名刺入れらしき物が見える。左手前には飲みかけのペットボトル、使い終わったらしき紙タオルや布、未開封の箱などが無造作に置かれている。マイクの周囲にも複数のケーブルが絡まり、整理されていない。\n" + "場所: デスク上（中央から左側）";
-        
+        outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().analysisText;
+
     }
 
     void buttonSuggestionsTextCallback()
@@ -295,12 +303,11 @@ public class DialogUI : MonoBehaviour
 
         // Show the suggestions outputText in the dialog
         // ここでsuggestionsTextの表示処理を実装
-        Debug.Log("Suggestions outputText button clicked");
+        // Debug.Log("Suggestions outputText button clicked");
 
         // テキストを表示
         // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
-        outputText.GetComponent<TextMeshProUGUI>().text = "優先度: 高\n" + "提案: デスク上の不要な物（飲み物の空き容器、使い終わった紙類、布など）をまず片付け、ごみは捨てる。使用頻度の低い小物や書類は適切な収納場所に移動させる。\n" + "対象エリア: デスク上全体\n";
+        outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
 
     }
-    
 }
