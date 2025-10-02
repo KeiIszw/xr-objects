@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 5528862493905833580}
   - component: {fileID: 5528862493905833581}
   - component: {fileID: 5528862493905833582}
+  - component: {fileID: 4905879799934127619}
   m_Layer: 0
   m_Name: TidyUpProxy
   m_TagString: Untagged
@@ -380,6 +381,23 @@ MonoBehaviour:
   cleanlinessScore: 0
   analysisText: 
   suggestionsText: 
+--- !u!114 &4905879799934127619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528862493905833586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db09bbe0b264b45628f1f9af0a9e9f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiKey: AIzaSyD9aT-RugxxMYNluyoTmsVlpotBzDrvb20
+  analysisApiUrl: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+  analysisModelName: gemini-2.5-flash
+  imageGenerationApiUrl: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent
+  imageGenerationModelName: gemini-2.0-flash-preview-image-generation
 --- !u!1 &5528862494028012577
 GameObject:
   m_ObjectHideFlags: 0

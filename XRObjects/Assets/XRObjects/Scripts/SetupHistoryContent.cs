@@ -45,6 +45,7 @@ public class SetupHistoryContent : MonoBehaviour
     {
         // DialogUI.cs の activeHistoryContent にコンテンツをアタッチ
         TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = tidyUpObject;
+        TidyUpCursor.GetComponent<DialogUI>().buttonBeforeImgCallback();
 
         // ダイアログを表示
         dialog.SetActive(true);

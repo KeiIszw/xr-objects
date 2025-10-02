@@ -17,6 +17,7 @@ public class DialogUI : MonoBehaviour
     // public GameObject tidyUpListItemPrefab; // prefab for the tidy up list items
     public GameObject dialog;
     public GameObject menu;
+    public GameObject scoreText;
     public GameObject outputText;
     public Button buttonBeforeImg;
     public Button buttonAfterImg;
@@ -58,6 +59,8 @@ public class DialogUI : MonoBehaviour
         dialog.SetActive(false);
         // hide the menu at the start
         menu.SetActive(false);
+        // hide the scoreText at the start
+        scoreText.SetActive(false);
         // hide the outputText at the start
         outputText.SetActive(false);
 
@@ -167,6 +170,8 @@ public class DialogUI : MonoBehaviour
         dialog.SetActive(false);
         // hide the menu
         menu.SetActive(false);
+        // hide the scoreText
+        scoreText.SetActive(false);
         // hide the outputText
         outputText.SetActive(false);
         // show the capture button
@@ -196,10 +201,11 @@ public class DialogUI : MonoBehaviour
         outputText.SetActive(false);
     }
 
-    void buttonBeforeImgCallback()
+    public void buttonBeforeImgCallback()
     {
         menu.SetActive(false); // hide the menu
         outputText.SetActive(false); // hide the outputText
+        scoreText.SetActive(true); // show the scoreText
 
         // Show the before image in the dialog
         // ここでbeforeImgの表示処理を実装
@@ -240,6 +246,7 @@ public class DialogUI : MonoBehaviour
     {
         menu.SetActive(false); // hide the menu
         outputText.SetActive(false); // hide the outputText
+        scoreText.SetActive(false); // hide the scoreText
 
         // Show the after image in the dialog
         // ここでafterImgの表示処理を実装
@@ -282,7 +289,7 @@ public class DialogUI : MonoBehaviour
         dialog.GetComponent<Image>().sprite = null;
         menu.SetActive(false); // hide the menu
         outputText.SetActive(true); // show the outputText
-
+        scoreText.SetActive(false); // hide the scoreText
 
         // Show the analysis outputText in the dialog
         // ここでanalysisTextの表示処理を実装
@@ -290,7 +297,7 @@ public class DialogUI : MonoBehaviour
 
         // テキストを表示
         // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().analysisText;
-        outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().analysisText;
+        outputText.GetComponentInChildren<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().analysisText;
 
     }
 
@@ -300,6 +307,7 @@ public class DialogUI : MonoBehaviour
         dialog.GetComponent<Image>().sprite = null;
         menu.SetActive(false); // hide the menu
         outputText.SetActive(true); // show the outputText
+        scoreText.SetActive(false); // hide the scoreText
 
         // Show the suggestions outputText in the dialog
         // ここでsuggestionsTextの表示処理を実装
@@ -307,7 +315,7 @@ public class DialogUI : MonoBehaviour
 
         // テキストを表示
         // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
-        outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
+        outputText.GetComponentInChildren<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
 
     }
 }

@@ -26,8 +26,6 @@ public class SetupTidyupProxy : MonoBehaviour
     [HideInInspector] public int cleanlinessScore;
     [HideInInspector] public string analysisText;
     [HideInInspector] public string suggestionsText;
-    // [HideInInspector] public string beforeImgPath; // いらないかも
-    // [HideInInspector] public string afterImgPath; // いらないかも
 
 
     // Start is called before the first frame update
