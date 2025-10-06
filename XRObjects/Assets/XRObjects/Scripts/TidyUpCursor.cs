@@ -76,6 +76,9 @@ public class TidyUpCursor : MonoBehaviour
 
         // TidyUpProxyに履歴ボタンをアタッチ
         newAnchor.GetComponent<SetupTidyupProxy>().historyContent = newHistoryContent;
+
+        // 履歴ボタンを初期化
+        newHistoryContent.GetComponent<SetupHistoryContent>().Initialize();
       }
       else
       {

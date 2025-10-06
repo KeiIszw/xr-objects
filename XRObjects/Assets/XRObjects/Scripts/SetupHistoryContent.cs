@@ -16,6 +16,33 @@ public class SetupHistoryContent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // if (tidyUpObject.objectIsSelected)
+        // {
+        //     buttonShowDialogCallback();
+        //     tidyUpObject.GetComponent<SetupTidyupProxy>().objectIsSelected = false;
+        // }
+    }
+
+    public void buttonShowDialogCallback()
+    {
+        // DialogUI.cs の activeHistoryContent にコンテンツをアタッチ
+        TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = tidyUpObject;
+        TidyUpCursor.GetComponent<DialogUI>().buttonBeforeImgCallback();
+
+        // ダイアログを表示
+        dialog.SetActive(true);
+    }
+
+    public void Initialize()
+    {
+        // void Start()だと，SetActive(false)の場合に呼ばれないので，別関数にして，TidyUpCursor.csから呼び出す
+
         // Get the dialog GameObject from the scene
         GameObject Canvas = GameObject.Find("Canvas");
         dialog = Canvas.transform.Find("DialogPanel").gameObject;
@@ -33,21 +60,5 @@ public class SetupHistoryContent : MonoBehaviour
         // 履歴コンテンツのテキストを設定
         string captureDateTime = tidyUpObject.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
         GetComponentInChildren<TextMeshProUGUI>().text = captureDateTime;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void buttonShowDialogCallback()
-    {
-        // DialogUI.cs の activeHistoryContent にコンテンツをアタッチ
-        TidyUpCursor.GetComponent<DialogUI>().activeHistoryContent = tidyUpObject;
-        TidyUpCursor.GetComponent<DialogUI>().buttonBeforeImgCallback();
-
-        // ダイアログを表示
-        dialog.SetActive(true);
     }
 }

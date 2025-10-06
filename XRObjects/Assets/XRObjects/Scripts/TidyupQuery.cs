@@ -299,6 +299,10 @@ public class TidyupQuery : MonoBehaviour
         GameObject historyContent = transform.gameObject.GetComponent<SetupTidyupProxy>().historyContent;
         historyContent.GetComponentInChildren<TextMeshProUGUI>().text = report.overall_cleanliness_score.ToString() + "点 / " + captureDateTime;
 
+        // Update the TidyupProxy metadata menu text
+        GameObject metadataMenu = transform.gameObject.GetComponent<SetupTidyupProxy>().metadataMenu;
+        metadataMenu.GetComponentInChildren<TextMeshProUGUI>().text = report.overall_cleanliness_score.ToString() + "点\n" + captureDateTime;
+
         // Update the scoreText in the dialog
         GameObject scoreText = historyContent.GetComponent<SetupHistoryContent>().TidyUpCursor.GetComponent<DialogUI>().scoreText;
         scoreText.GetComponent<TextMeshProUGUI>().text = report.overall_cleanliness_score.ToString() + "点";

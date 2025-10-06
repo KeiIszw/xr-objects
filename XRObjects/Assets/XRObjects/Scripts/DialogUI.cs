@@ -88,16 +88,6 @@ public class DialogUI : MonoBehaviour
         buttonAnalysisText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("analysis");
         buttonSuggestionsText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("suggestions");
         buttonTidyUpList.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("history");
-
-        // // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
-        // // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。
-        // Dictionary<string, object> myDictionaryObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(testJson);
-
-        // Debug.Log("--- Newtonsoft.JsonでDictionary<string, object>へ変換 ---");
-        // foreach (KeyValuePair<string, object> pair in myDictionaryObject)
-        // {
-        //     Debug.Log($"Key: {pair.Key}, Value: {pair.Value} (Type: {pair.Value.GetType().Name})");
-        // }
     }
 
     // Update is called once per frame
