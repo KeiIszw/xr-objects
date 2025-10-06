@@ -13,11 +13,11 @@
   "detectionOff": "Detection OFF",
   "planesShown": "planes SHOWN",
   "planesHidden": "planes HIDDEN",
-  "history": "Score History",
+  "history": "Analysis History",
   "deleteObjects": "Delete Objects",
   "speechMenu": "Speech Menu",
-  "before": "Before Cleanup",
-  "after": "After Cleanup",
+  "before": "Before Tidy Up",
+  "after": "After Tidy Up",
   "analysis": "Analysis",
   "suggestions": "Suggestions"
 }

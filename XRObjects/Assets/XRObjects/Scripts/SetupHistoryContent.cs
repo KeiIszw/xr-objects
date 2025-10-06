@@ -16,7 +16,9 @@ public class SetupHistoryContent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 履歴コンテンツのテキストを設定
+        string captureDateTime = tidyUpObject.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
+        GetComponentInChildren<TextMeshProUGUI>().text = captureDateTime;
     }
 
     // Update is called once per frame

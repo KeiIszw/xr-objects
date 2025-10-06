@@ -10,6 +10,11 @@ using TMPro;
 public class TidyUpCursor : MonoBehaviour
 {
   public Button buttonPlaceObject; // キャプチャボタン
+  public GameObject panelButtons; // 画面下のボタンパネル
+  public GameObject panelTidyup; // 片付け用のボタンパネル
+  public Button buttonHMenu; // 画面右下のメニューボタン
+  public Button buttonCloseMenu; // 画面右下のメニューを閉じるボタン
+  public GameObject panelSpeech; // 画面右上の音声認識パネル
   private float distanceFromCamera = 1000f; // distance from the camera to place the object
   public ARRaycastManager raycastManager;
   public GameObject objectToPlace; // TidyUpProxyプレハブ
@@ -31,6 +36,21 @@ public class TidyUpCursor : MonoBehaviour
     Vector3 initialPosition = Camera.main.transform.position + Camera.main.transform.forward * distanceFromCamera;
     transform.position = initialPosition;
     Debug.Log("TidyUpCursor Start: Initial position set to " + initialPosition);
+
+    // Set up the button to show/hide the button panel
+    panelButtons.SetActive(false); // hide the button panel initially
+    buttonHMenu.onClick.AddListener(() =>
+    {
+      panelButtons.SetActive(true); // show the button panel
+    panelTidyup.SetActive(false); // hide the tidy up button panel
+    });
+
+    buttonCloseMenu.onClick.AddListener(() =>
+    {
+      panelButtons.SetActive(false); // hide the button panel
+      panelTidyup.SetActive(true); // show the tidy up button panel
+    });
+
   }
 
   // Update is called once per frame

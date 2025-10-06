@@ -25,12 +25,14 @@ public class SetupTidyupProxy : MonoBehaviour
     [HideInInspector] public string captureDateTime; // yyyy-MM-dd:HH-mm-ss
     [HideInInspector] public int cleanlinessScore;
     [HideInInspector] public string analysisText;
-    [HideInInspector] public string suggestionsText;
+    // [HideInInspector] public string suggestionsText;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        cleanlinessScore = -1;
+
         // キャプチャ
         CameraCapturer cameraCapturer = new CameraCapturer();
         cameraCapturer.CaptureAndSave();
@@ -45,8 +47,8 @@ public class SetupTidyupProxy : MonoBehaviour
         // updateMetadata関数定義して、llmの応答を受け取ったときに呼び出す
         // llmのスクリプトをproxyにアタッチしておく
         analysisText = "Now Loading...";
-        suggestionsText = "Now Loading...";
-        metadataMenu.GetComponentInChildren<TextMeshProUGUI>().text = captureDateTime;
+        // suggestionsText = "Now Loading...";
+        metadataMenu.GetComponentInChildren<TextMeshProUGUI>().text = "Now Loading...\n" + captureDateTime;
 
         // // JSON文字列をDictionary<string, object>に変換 (値の型が混合している場合)
         // // object型を使用すると、JSONの様々な型の値を柔軟に受け取れます。

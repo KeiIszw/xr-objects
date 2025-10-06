@@ -19,10 +19,11 @@ public class DialogUI : MonoBehaviour
     public GameObject menu;
     public GameObject scoreText;
     public GameObject outputText;
+    public GameObject outputImage;
     public Button buttonBeforeImg;
     public Button buttonAfterImg;
     public Button buttonAnalysisText;
-    public Button buttonSuggestionsText;
+    // public Button buttonSuggestionsText;
     // [HideInInspector] public GameObject tidyUpListContent; // content of the tidy up list
     [HideInInspector] public bool showTidyUpList = false;
     [HideInInspector] public GameObject activeHistoryContent; // content of the tidy up list
@@ -63,6 +64,8 @@ public class DialogUI : MonoBehaviour
         scoreText.SetActive(false);
         // hide the outputText at the start
         outputText.SetActive(false);
+        // hide the outputImage at the start
+        outputImage.SetActive(false);
 
         Button buttonBeforeImgButton = buttonBeforeImg.GetComponent<Button>();
         buttonBeforeImgButton.onClick.AddListener(buttonBeforeImgCallback);
@@ -73,8 +76,8 @@ public class DialogUI : MonoBehaviour
         Button buttonAnalysisTextButton = buttonAnalysisText.GetComponent<Button>();
         buttonAnalysisTextButton.onClick.AddListener(buttonAnalysisTextCallback);
 
-        Button buttonSuggestionsTextButton = buttonSuggestionsText.GetComponent<Button>();
-        buttonSuggestionsTextButton.onClick.AddListener(buttonSuggestionsTextCallback);
+        // Button buttonSuggestionsTextButton = buttonSuggestionsText.GetComponent<Button>();
+        // buttonSuggestionsTextButton.onClick.AddListener(buttonSuggestionsTextCallback);
 
         LanguageManager.Instance.OnLanguageChanged += UpdateText;
         UpdateText();
@@ -86,7 +89,7 @@ public class DialogUI : MonoBehaviour
         buttonBeforeImg.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("before");
         buttonAfterImg.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("after");
         buttonAnalysisText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("analysis");
-        buttonSuggestionsText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("suggestions");
+        // buttonSuggestionsText.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("suggestions");
         buttonTidyUpList.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Instance.GetText("history");
     }
 
@@ -164,6 +167,8 @@ public class DialogUI : MonoBehaviour
         scoreText.SetActive(false);
         // hide the outputText
         outputText.SetActive(false);
+        // hide the outputImage
+        outputImage.SetActive(false);
         // show the capture button
         buttonCapture.gameObject.SetActive(true);
         // reset the dialog image to default
@@ -188,7 +193,7 @@ public class DialogUI : MonoBehaviour
         }
 
         // hide the outputText
-        outputText.SetActive(false);
+        // outputText.SetActive(false);
     }
 
     public void buttonBeforeImgCallback()
@@ -196,10 +201,17 @@ public class DialogUI : MonoBehaviour
         menu.SetActive(false); // hide the menu
         outputText.SetActive(false); // hide the outputText
         scoreText.SetActive(true); // show the scoreText
+        outputImage.SetActive(true); // show the outputImage
 
-        // Show the before image in the dialog
-        // ここでbeforeImgの表示処理を実装
-        // Debug.Log("Before image button clicked");
+        // スコアを表示
+        if (activeHistoryContent.GetComponent<SetupTidyupProxy>().cleanlinessScore != -1)
+        {
+            scoreText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().cleanlinessScore.ToString() + "点";
+        }
+        else
+        {
+            scoreText.GetComponent<TextMeshProUGUI>().text = "- 点";
+        }
 
         // 写真を表示
         string captureDateTime = activeHistoryContent.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
@@ -217,8 +229,8 @@ public class DialogUI : MonoBehaviour
             if (texture.LoadImage(imageData))
             {
                 Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                dialog.GetComponent<Image>().sprite = sprite;
-                dialog.GetComponent<Image>().preserveAspect = true;
+                outputImage.GetComponent<Image>().sprite = sprite;
+                outputImage.GetComponent<Image>().preserveAspect = true;
             }
             else
             {
@@ -237,10 +249,7 @@ public class DialogUI : MonoBehaviour
         menu.SetActive(false); // hide the menu
         outputText.SetActive(false); // hide the outputText
         scoreText.SetActive(false); // hide the scoreText
-
-        // Show the after image in the dialog
-        // ここでafterImgの表示処理を実装
-        // Debug.Log("After image button clicked");
+        outputImage.SetActive(true); // show the outputImage
 
         // 写真を表示
         string captureDateTime = activeHistoryContent.GetComponent<SetupTidyupProxy>().captureDateTime; // yyyy-MM-dd:HH-mm-ss
@@ -258,8 +267,8 @@ public class DialogUI : MonoBehaviour
             if (texture.LoadImage(imageData))
             {
                 Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                dialog.GetComponent<Image>().sprite = sprite;
-                dialog.GetComponent<Image>().preserveAspect = true;
+                outputImage.GetComponent<Image>().sprite = sprite;
+                outputImage.GetComponent<Image>().preserveAspect = true;
             }
             else
             {
@@ -268,6 +277,9 @@ public class DialogUI : MonoBehaviour
         }
         else
         {
+            outputImage.SetActive(false); // hide the outputImage
+            outputText.GetComponentInChildren<TextMeshProUGUI>().text = "Now Loading...";
+            outputText.SetActive(true); // show the outputText
             Debug.Log("not found: " + filePath);
         }
 
@@ -280,6 +292,7 @@ public class DialogUI : MonoBehaviour
         menu.SetActive(false); // hide the menu
         outputText.SetActive(true); // show the outputText
         scoreText.SetActive(false); // hide the scoreText
+        outputImage.SetActive(false); // hide the outputImage
 
         // Show the analysis outputText in the dialog
         // ここでanalysisTextの表示処理を実装
@@ -291,21 +304,22 @@ public class DialogUI : MonoBehaviour
 
     }
 
-    void buttonSuggestionsTextCallback()
-    {
-        // reset the dialog image to default
-        dialog.GetComponent<Image>().sprite = null;
-        menu.SetActive(false); // hide the menu
-        outputText.SetActive(true); // show the outputText
-        scoreText.SetActive(false); // hide the scoreText
+    // void buttonSuggestionsTextCallback()
+    // {
+    //     // reset the dialog image to default
+    //     dialog.GetComponent<Image>().sprite = null;
+    //     menu.SetActive(false); // hide the menu
+    //     outputText.SetActive(true); // show the outputText
+    //     scoreText.SetActive(false); // hide the scoreText
+    //     outputImage.SetActive(false); // hide the outputImage
 
-        // Show the suggestions outputText in the dialog
-        // ここでsuggestionsTextの表示処理を実装
-        // Debug.Log("Suggestions outputText button clicked");
+    //     // Show the suggestions outputText in the dialog
+    //     // ここでsuggestionsTextの表示処理を実装
+    //     // Debug.Log("Suggestions outputText button clicked");
 
-        // テキストを表示
-        // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
-        outputText.GetComponentInChildren<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
+    //     // テキストを表示
+    //     // outputText.GetComponent<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
+    //     outputText.GetComponentInChildren<TextMeshProUGUI>().text = activeHistoryContent.GetComponent<SetupTidyupProxy>().suggestionsText;
 
-    }
+    // }
 }

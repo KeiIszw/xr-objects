@@ -307,17 +307,21 @@ public class TidyupQuery : MonoBehaviour
         GameObject scoreText = historyContent.GetComponent<SetupHistoryContent>().TidyUpCursor.GetComponent<DialogUI>().scoreText;
         scoreText.GetComponent<TextMeshProUGUI>().text = report.overall_cleanliness_score.ToString() + "点";
 
-        string analysisSummary = "【分析結果】\n" + "整頓スコア：" + report.overall_cleanliness_score.ToString() + "点\n" +
+        string analysisSummary = "【分析結果】\n\n" + "整頓スコア：" + report.overall_cleanliness_score.ToString() + "点\n" +
                                  (report.analysis_of_disorder != null && report.analysis_of_disorder.Any() ?
-                                 "[散らかり分析]:\n" + string.Join("\n", report.analysis_of_disorder.Select(a => $"- (場所): {a.location}\n- (詳細): {a.details}\n- (カテゴリ): {a.category}")) + "\n"
-                                 : "[散らかり分析]: なし\n");
+                                 string.Join("\n", report.analysis_of_disorder.Select(a => $"- (場所): {a.location}\n- (詳細): {a.details}\n- (カテゴリ): {a.category}\n")) + "\n"
+                                 : "[散らかり分析]: なし\n") + "\n##########################################################################\n\n" +
+                                 "【改善提案】\n\n" +
+                                (report.improvement_suggestions != null && report.improvement_suggestions.Any() ?
+                                string.Join("\n", report.improvement_suggestions.Select(s => $"- (対象エリア): {s.target_area}\n- (提案): {s.suggestion}\n- (優先度): {s.priority}\n"))
+                                : "[改善提案]: なし");
 
-        string suggestionsSummary = "【改善提案】\n" +
-                                    (report.improvement_suggestions != null && report.improvement_suggestions.Any() ?
-                                    "[改善提案]:\n" + string.Join("\n", report.improvement_suggestions.Select(s => $"- (対象エリア): {s.target_area}\n- (提案): {s.suggestion}\n- (優先度): {s.priority}"))
-                                    : "[改善提案]: なし");
+        // string suggestionsSummary = "【改善提案】\n" +
+        //                             (report.improvement_suggestions != null && report.improvement_suggestions.Any() ?
+        //                             "[改善提案]:\n" + string.Join("\n", report.improvement_suggestions.Select(s => $"- (対象エリア): {s.target_area}\n- (提案): {s.suggestion}\n- (優先度): {s.priority}"))
+        //                             : "[改善提案]: なし");
         transform.gameObject.GetComponent<SetupTidyupProxy>().analysisText = analysisSummary;
-        transform.gameObject.GetComponent<SetupTidyupProxy>().suggestionsText = suggestionsSummary;
+        // transform.gameObject.GetComponent<SetupTidyupProxy>().suggestionsText = suggestionsSummary;
 
     }
 

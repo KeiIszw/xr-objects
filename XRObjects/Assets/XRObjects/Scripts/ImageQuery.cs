@@ -22,7 +22,7 @@ public class ImageQuery : MonoBehaviour
 {
 
   // Get your Gemini API key here: https://aistudio.google.com/app/apikey 
-  private string apiKey = "API_KEY_HERE";
+  private string apiKey = "AIzaSyD9aT-RugxxMYNluyoTmsVlpotBzDrvb20";
   private string queryURL;
 
   [HideInInspector] public Texture2D Texture2DImageOfObject;

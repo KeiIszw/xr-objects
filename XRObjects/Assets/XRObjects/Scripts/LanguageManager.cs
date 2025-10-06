@@ -26,7 +26,7 @@ public class LanguageData
     public string before;
     public string after;
     public string analysis;
-    public string suggestions;
+    // public string suggestions;
 }
 
 public class LanguageManager : MonoBehaviour
@@ -143,7 +143,7 @@ public class LanguageManager : MonoBehaviour
             case "before": return currentLanguage.before;
             case "after": return currentLanguage.after;
             case "analysis": return currentLanguage.analysis;
-            case "suggestions": return currentLanguage.suggestions;
+            // case "suggestions": return currentLanguage.suggestions;
             default: return "not found";
         }
     }
