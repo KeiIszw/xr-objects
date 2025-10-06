@@ -249,6 +249,7 @@ public class TidyupQuery : MonoBehaviour
         imageGenPromptBuilder.AppendLine("- 家具や装飾品は美しく配置され、空間全体に調和が取れていること。");
         imageGenPromptBuilder.AppendLine("- 必要であれば、自然光が差し込み、部屋全体が明るく見えるようにしてください。");
         imageGenPromptBuilder.AppendLine("- 全体的に、清潔感があり、居心地の良い、完璧に整理された部屋のイメージを生成してください。");
+        imageGenPromptBuilder.AppendLine("- 空間の役割を考慮し、その目的に合った整頓された状態を反映してください。例えばデスクの上であれば，仕事に必要なPC等は削除しないようにしてください。");
         imageGenPromptBuilder.AppendLine("\n--- 清掃レポート ---");
         imageGenPromptBuilder.AppendLine($"全体的な清潔度スコア: {report.overall_cleanliness_score}/100");
 

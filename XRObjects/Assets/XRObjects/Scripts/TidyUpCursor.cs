@@ -37,12 +37,16 @@ public class TidyUpCursor : MonoBehaviour
     transform.position = initialPosition;
     Debug.Log("TidyUpCursor Start: Initial position set to " + initialPosition);
 
+    // Initially, show the tidy up button panel and hide the button panel
+    panelButtons.SetActive(false);
+    panelTidyup.SetActive(true);
+
     // Set up the button to show/hide the button panel
     panelButtons.SetActive(false); // hide the button panel initially
     buttonHMenu.onClick.AddListener(() =>
     {
       panelButtons.SetActive(true); // show the button panel
-    panelTidyup.SetActive(false); // hide the tidy up button panel
+      panelTidyup.SetActive(false); // hide the tidy up button panel
     });
 
     buttonCloseMenu.onClick.AddListener(() =>
